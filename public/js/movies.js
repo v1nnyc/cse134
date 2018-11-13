@@ -84,6 +84,7 @@ function addMovie() {
   document.getElementById("save-button").onclick = newMovie;
 }
 
+// gets all the info from the form
 function getInfoFromDialog() {
   let title = DOMPurify.sanitize(document.getElementById("title").value);
   let year = DOMPurify.sanitize(document.getElementById("yor").value);
@@ -96,6 +97,7 @@ function getInfoFromDialog() {
   }
 }
 
+// called when "save" is clicked after making a new movie
 function newMovie() {
   let movieInfo = getInfoFromDialog();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
@@ -105,6 +107,7 @@ function newMovie() {
   closeDialog();
 }
 
+// called when "save" is clicked after editing a movie
 function editingMovie() {
   let movieInfo = getInfoFromDialog();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
@@ -121,23 +124,27 @@ function editingMovie() {
   closeDialog();
 }
 
-function clearDialog() {
-  document.getElementById("yor").value = "";
-  document.getElementById("title").value = "";
-  document.getElementById("rating").selectedIndex = 0;
-}
-
+// opens the dialog
 function openDialog() {
   document.getElementById("gray-out").hidden = false;
   document.getElementById("dialog").show();
 }
 
+// closes the dialog box and clears it
 function closeDialog() {
   clearDialog();
   document.getElementById("gray-out").hidden = true;
   document.getElementById("dialog").open = false;
 }
 
+// responsible for clearing the dialog box after it closes
+function clearDialog() {
+  document.getElementById("yor").value = "";
+  document.getElementById("title").value = "";
+  document.getElementById("rating").selectedIndex = 0;
+}
+
+// called when the delete button is clicked
 function deleteMovie() {
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
   for (let i = 0; i < movieList.length; i++) {
@@ -149,6 +156,7 @@ function deleteMovie() {
   addMovies();
 }
 
+// called when there's nothing in session storage to fill it with filler
 function initializeMovies() {
   if (sessionStorage.getItem("movieList") === null) {
     sessionStorage.setItem("movieList", JSON.stringify(
@@ -159,6 +167,7 @@ function initializeMovies() {
   }
 }
 
+// removes the movies on the DOM before putting more in
 function removeMovies() {
   var myNode = document.getElementById("movies-list");
   while (myNode.firstChild) {
@@ -166,6 +175,7 @@ function removeMovies() {
   }
 }
 
+// adds the movies to the dom
 function addMovies() {
   removeMovies();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));

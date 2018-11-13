@@ -1,3 +1,4 @@
+//used to make the add movie button (lol redundant)
 class ButtonFactory {
   constructor(type, secondary) {
     let button = document.createElement("button");
@@ -8,6 +9,7 @@ class ButtonFactory {
   }
 }
 
+// used to make movies objects for storage
 class MovieObject {
   constructor(title, yor, rating) {
     this.title = title;
@@ -16,6 +18,7 @@ class MovieObject {
   }
 }
 
+// used to make movie objects for the DOM
 class MovieThing {
   constructor(movieObject, index) {
     let movieLi = document.createElement("li");
@@ -30,6 +33,7 @@ class MovieThing {
   }
 }
 
+// used to make p elements for buttons for the movie DOM objects
 class PFactory {
   constructor(movieObject, type) {
     let buttonIcon = {
@@ -58,6 +62,7 @@ class PFactory {
   }
 }
 
+// called when the edit button is clicked
 function editMovie() {
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
   let movie;
@@ -82,11 +87,13 @@ function editMovie() {
   document.getElementById("save-button").onclick = editingMovie;
 }
 
+// called when the add button is clicked
 function addMovie() {
   openDialog();
   document.getElementById("save-button").onclick = newMovie;
 }
 
+// gets entered info from dialog box
 function getInfoFromDialog() {
   let title = DOMPurify.sanitize(document.getElementById("title").value);
   let year = DOMPurify.sanitize(document.getElementById("yor").value);
@@ -99,6 +106,7 @@ function getInfoFromDialog() {
   }
 }
 
+// called when save is clicked and you're making a new movie
 function newMovie() {
   let movieInfo = getInfoFromDialog();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
@@ -108,6 +116,7 @@ function newMovie() {
   closeDialog();
 }
 
+// called when save is clicked and your editing a movie
 function editingMovie() {
   let movieInfo = getInfoFromDialog();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
@@ -124,6 +133,7 @@ function editingMovie() {
   closeDialog();
 }
 
+// clears dialog when it closes
 function clearDialog() {
   document.getElementById("yor").value = "";
   document.getElementById("title").value = "";
@@ -141,6 +151,7 @@ function closeDialog() {
   document.getElementById("dialog").open = false;
 }
 
+// called when you delete a movie to remove it from storage
 function deleteMovie() {
 
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
@@ -153,6 +164,7 @@ function deleteMovie() {
   addMovies();
 }
 
+// initializes storage when its empty with default list
 function initializeMovies() {
   if (sessionStorage.getItem("movieList") === null) {
     sessionStorage.setItem("movieList", JSON.stringify(
@@ -164,6 +176,7 @@ function initializeMovies() {
   }
 }
 
+// removes all the movies from dom before adding more
 function removeMovies() {
   var myNode = document.getElementById("movies-list");
   while (myNode.firstChild) {
@@ -171,6 +184,7 @@ function removeMovies() {
   }
 }
 
+// adds movie to dom
 function addMovies() {
   removeMovies();
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));

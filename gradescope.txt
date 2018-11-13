@@ -1,0 +1,5 @@
+hi here's a link to firebase
+https://cse134-3.firebaseapp.com/
+
+and here's my github repo
+https://github.com/v1nnyc/cse134
