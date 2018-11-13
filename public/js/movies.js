@@ -18,7 +18,6 @@ class MovieObject {
 
 class MovieThing {
   constructor(movieObject, index) {
-    console.log(index)
     let movieLi = document.createElement("li");
     movieLi.id = movieObject.title;
     movieLi.innerHTML = "" + movieObject.title + ' (' + movieObject.yor +
@@ -172,7 +171,6 @@ function addMovies() {
   button.innerHTML = "Add Movie"
   document.getElementById("buttons-n-such").appendChild(button)
   for (let movieObject in movieList) {
-    console.log(new MovieThing(movieList[movieObject], movieObject))
     document.getElementById("movies-list").appendChild(new MovieThing(
       movieList[movieObject], movieObject));
     document.getElementById(movieList[movieObject].title).appendChild(
