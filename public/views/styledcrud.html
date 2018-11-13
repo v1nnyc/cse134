@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <script src="../node_modules/dompurify/dist/purify.min.js"></script>
+  <script src="../js/styledmovies.js"></script>
+  <title>Movie CRUD</title>
+  <style>
+    li p {
+      /* other styles goes here... */
+      display: inline-block;
+    }
+
+    li {
+      padding: 5px;
+      border-radius: 0 15px 15px 0;
+      background-color: lavenderblush;
+      margin: 15px;
+      width: 35%;
+      border-style: solid;
+      border-width: 5px;
+      border-color: white;
+    }
+
+    li > .movie-info{
+      padding: 5px;
+    }
+
+    .icon-outer {
+      float:right;
+      padding:5px;
+    }
+
+    p {
+      margin: 0px;
+    }
+
+    h1{
+      background-color: Azure;
+    }
+
+    dialog {
+      border-radius: 15px;
+      border-color: black;
+      background-color: Azure;
+      left: 0;
+      margin: auto;
+      margin-top: -100px;
+      position: absolute;
+      top: 50%;
+      width: 22%
+    }
+
+    input, select {
+      margin: 2px;
+      width: 30%;
+      float: right;
+    }
+
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background-color: lightyellow;
+    }
+
+    .icon {
+      height: 20px;
+      margin: auto;
+      align: right;
+    }
+
+    .icon:hover {
+      border-radius: 15px;
+      background-color: honeydew;
+    }
+
+    #movies-list {
+
+    }
+
+    #movie-form>#row {
+      margin: 15px;
+    }
+
+    #buttons {
+      padding-top: 15px
+    }
+
+    button {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: wheat;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px #999;
+    }
+
+    button:hover {
+      opacity: 1;
+      background-color: BurlyWood;
+    }
+
+    button:active {
+      background-color: saddlebrown;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+
+  </style>
+</head>
+
+<body onload="initializeEverything()">
+  <main>
+    <div style="position:fixed;
+                z-index: 1; /* above everything else */
+                top:0; left:0; bottom:0; right:0;
+                background:rgba(0,0,0,.2);
+    " id="gray-out" hidden>
+    </div>
+    <div id="movie-stuff" align=center>
+      <h1>Big List of Movies</h1>
+      <ul id="movies-list">
+      </ul>
+      <div id="buttons-n-such">
+        <button id="add" onclick="addMovie()"><b>Add Movie</b></button>
+      </div>
+    </div>
+
+    <dialog id="dialog" style="z-index: 2;">
+      <form id="movie-form">
+        <div id="row">
+          <label for="title"><b>Title:</b></label>
+          <input name="title" style="width: 70%" id="title" />
+          <br />
+        </div>
+        <div id="row">
+          <label for="yor"><b>Year of Release:</b></label>
+          <input type="number" id="yor" name="yor" min="1900" max="2025">
+          <br />
+        </div>
+        <div id="row">
+          <label for="rating"><b>Rating:</b></label>
+          <select id="rating">
+              <option value="G" selected>G</option>
+              <option value="PG">PG</option>
+              <option value="PG-13">PG-13</option>
+              <option value="R">R</option>
+              <option value="NR">NR</option>
+            </select>
+          <br />
+        </div>
+
+      </form>
+      <div id="buttons" align="center">
+        <button onclick="closeDialog()">Cancel</button>
+        <button id="save-button">Save</button>
+      </div>
+
+    </dialog>
+  </main>
+</body>

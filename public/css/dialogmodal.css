@@ -1,0 +1,42 @@
+dialog {
+  left: 0;
+  margin: auto;
+  margin-top: -100px;
+  position: absolute;
+  top: 50%;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  margin-top: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
+dialog>#alertDiv {
+  text-align: center;
+}
+
+#confirmDiv button {
+  float: right;
+  margin: 2.5px;
+}
+
+#promptDiv button {
+  float: right;
+  margin: 2.5px;
+}
+
+#promptDiv input {
+  width: 350px;
+  margin-bottom: 25px;
+}
+
+#promptDiv p {
+  margin-bottom: 0px;
+}

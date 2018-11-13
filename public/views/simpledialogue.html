@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <script src="../node_modules/dompurify/dist/purify.min.js"></script>
+  <title>Simple Dialogues?</title>
+  <style>
+    table,
+    td {
+      border: 1px solid black;
+    }
+
+    td {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body onload="assign()">
+  <header>
+    <h1>Simple Dialogues?</h1>
+  </header>
+  <main>
+    <div id="buttons">
+      <button id="alert">Alert</button>
+      <button id="confirm">Confirm</button>
+      <button id="prompt">Prompt</button>
+      <button id="safer-prompt">Safer Prompt</button>
+    </div>
+    <hr />
+    <table id="table" hidden>
+      <tr>
+        <td>
+          <output id="output"></output>
+        </td>
+      </tr>
+    </table>
+  </main>
+
+  <script>
+    function assign() {
+      let methods = {
+        "alert": function() {
+          alert('Alert pressed!');
+        },
+        "confirm": function() {
+          showBox();
+          assignOutput("Confirm result: " + confirm("Do you confirm this?"));
+        },
+        "prompt": function() {
+          showBox();
+          assignOutput("Prompt result: " + (prompt("What is your name?") || "User didn’t enter anything"));
+        },
+        "safer-prompt": function() {
+          showBox();
+          assignOutput("Prompt result: " + DOMPurify.sanitize((prompt("What is your name?") || "User didn’t enter anything")));
+        }
+      }
+      let buttons = document.getElementById('buttons').children;
+      for (let i = 0; i < buttons.length; i++) {
+        let child = buttons[i];
+        document.getElementById(child.id).addEventListener("click", function() {
+          clearBoxThen(methods[child.id]);
+        });
+      }
+    }
+
+    function assignOutput(string){
+      document.getElementById("output").innerHTML = string;
+    }
+
+    function showBox() {
+      document.getElementById("table").hidden = false;
+    }
+
+    function clearBoxThen(callback) {
+      document.getElementById("table").hidden = true;
+      setTimeout(function() {
+        callback()
+      }, 0.10);
+    }
+  </script>
+</body>
+
+</html>

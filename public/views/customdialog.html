@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <script src="../node_modules/dompurify/dist/purify.min.js"></script>
+  <script src="../js/customdialog.js"></script>
+  <link rel="stylesheet" href="../css/dialogmodal.css">
+  <title>Custom Dialogues</title>
+</head>
+
+<body onload="assign()">
+  <main>
+    <div style="position:fixed;
+                z-index: 1; /* above everything else */
+                top:0; left:0; bottom:0; right:0;
+                background:rgba(0,0,0,.2);
+    " id="gray-out" hidden>
+    </div>
+    <div>
+      <div id="buttons">
+        <button id="alert">Alert</button>
+        <button id="confirm">Confirm</button>
+        <button id="prompt">Prompt</button>
+      </div>
+      <table id="table" hidden>
+        <tr>
+          <td>
+            <output id="output"></output>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+    <dialog id="dialog" style="z-index: 2;">
+    </dialog>
+
+  </main>
+
+</body>
+
+</html>
