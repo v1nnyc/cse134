@@ -1,3 +1,9 @@
+// called on onload and adds movies and adds the default list to session storage
+function initializeEverything() {
+  initializeMovies();
+  addMovies();
+}
+
 class ButtonFactory {
   constructor(type, secondary) {
     let button = document.createElement("button");
@@ -8,6 +14,7 @@ class ButtonFactory {
   }
 }
 
+// used in storing movie data in sessionStorage
 class MovieObject {
   constructor(title, yor, rating) {
     this.title = title;
@@ -16,7 +23,8 @@ class MovieObject {
   }
 }
 
-class MovieThing {
+// the movie list objects that are appended to the DOM
+class MovieListObject {
   constructor(movieObject, index) {
     let movieLi = document.createElement("li");
     movieLi.id = movieObject.title;
@@ -26,6 +34,7 @@ class MovieThing {
   }
 }
 
+// creates p element buttons for adding new movies dialog
 class PFactory {
   constructor(movieObject, type) {
     let buttonValues = {
@@ -45,6 +54,7 @@ class PFactory {
   }
 }
 
+// called when edit button is clicked, gets all of the info for the dialog box
 function editMovie() {
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
   let movie;
@@ -68,6 +78,7 @@ function editMovie() {
   document.getElementById("save-button").onclick = editingMovie;
 }
 
+// called when add new movie is called
 function addMovie() {
   openDialog();
   document.getElementById("save-button").onclick = newMovie;
@@ -128,7 +139,6 @@ function closeDialog() {
 }
 
 function deleteMovie() {
-
   let movieList = JSON.parse(sessionStorage.getItem("movieList"));
   for (let i = 0; i < movieList.length; i++) {
     if (movieList[i].title == this.parentNode.id) {
@@ -171,7 +181,7 @@ function addMovies() {
   button.innerHTML = "Add Movie"
   document.getElementById("buttons-n-such").appendChild(button)
   for (let movieObject in movieList) {
-    document.getElementById("movies-list").appendChild(new MovieThing(
+    document.getElementById("movies-list").appendChild(new MovieListObject(
       movieList[movieObject], movieObject));
     document.getElementById(movieList[movieObject].title).appendChild(
       new PFactory(movieList[movieObject], "edit"))
@@ -180,9 +190,4 @@ function addMovies() {
     document.getElementById(movieList[movieObject].title).appendChild(
       new PFactory(movieList[movieObject], "delete"))
   }
-}
-
-function initializeEverything() {
-  initializeMovies();
-  addMovies();
 }

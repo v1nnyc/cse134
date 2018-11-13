@@ -40,6 +40,8 @@
   </main>
 
   <script>
+    // this method is responsible for setting event listeners to buttons.
+    // it iterates through each button and assigns a certain set of methods to each
     function assign() {
       let methods = {
         "alert": function() {
@@ -67,6 +69,7 @@
       }
     }
 
+    // this is what gets called to output the user stuff from the alert boxes
     function assignOutput(string){
       document.getElementById("output").innerHTML = string;
     }
@@ -75,6 +78,7 @@
       document.getElementById("table").hidden = false;
     }
 
+    // set a timer so that alert shows after the table is hidden
     function clearBoxThen(callback) {
       document.getElementById("table").hidden = true;
       setTimeout(function() {
